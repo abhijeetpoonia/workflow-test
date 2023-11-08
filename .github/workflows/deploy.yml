@@ -13,6 +13,7 @@ jobs:
       SERVER_NAME: ip-172-31-47-166
       SERVER_IP: 35.154.185.167
       DEPLOY_PATH: /home/ubuntu/Three-tierapp/backend/builds
+      PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
 
     steps:
       - name: Checkout code
@@ -28,5 +29,4 @@ jobs:
 
       - name: Deploy to EC2 Instance
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }} ubuntu@$SERVER_IP 'cd $DEPLOY_PATH && git pull'
-
+          ssh -o StrictHostKeyChecking=no -i $PRIVATE_KEY ubuntu@$SERVER_IP 'cd $DEPLOY_PATH && git pull'
