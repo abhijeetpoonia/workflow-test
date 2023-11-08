@@ -32,7 +32,7 @@ jobs:
 
       - name: install dependencies
         run: |
-          echo pwd
+          pwd
           cd /home/ubuntu/Three-tierapp/backend/final
           npm install
 
