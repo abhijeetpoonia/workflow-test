@@ -31,7 +31,7 @@ jobs:
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"
 
       - name: Deploy app
-        run: npm start & /home/ubuntu/Three-tierapp/backend/final
+        run: |
+          cd /home/ubuntu/Three-tierapp/backend/final
+          npm start
 
-
-   
