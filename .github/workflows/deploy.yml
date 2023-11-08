@@ -21,14 +21,21 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
-      - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
+      - name: Deploy to EC2
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
-          SOURCE: "./"
-          REMOTE_HOST: "ec2-35-154-185-167.ap-south-1.compute.amazonaws.com"
-          REMOTE_USER: "ubuntu"
-          TARGET: "/home/ubuntu/Three-tierapp/backend/final"
+          PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          HOSTNAME: ${{ secrets.HOST_IP }}
+          USER_NAME: ${{ secrets.HOST_USER }}
         run: |
-          cd /home/ubuntu/Three-tierapp/backend/final
-          npm start
+          echo "$PRIVATE_KEY" > key.pem && chmod 600 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} '
+            cd /home/ubuntu &&
+            sudo docker stop $(docker ps -a -q) &&
+            sudo docker rm $(docker ps -a -q) &&
+            sudo docker rmi -f $(docker images -q) &&
+            sudo docker pull ritikvirus/portfolioubuntu:${{ steps.taggerDryRun.outputs.new_tag }} &&
+            sudo docker rm springboot || true &&
+            sudo docker run -d -p 8080:80 --name portfolio ritikvirus/portfolioubuntu:${{ steps.taggerDryRun.outputs.new_tag }}
+            echo ${{ github.sha }}
+          '
+
