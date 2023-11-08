@@ -29,7 +29,7 @@ jobs:
           git config --global credential.helper store  # Store Git credentials
           echo "https://github.com:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-      - name: Deploy
+      - name: start
         run: |
           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
           npm start
