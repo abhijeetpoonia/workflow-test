@@ -30,6 +30,6 @@ jobs:
           SOURCE: "./"
           REMOTE_HOST: "ec2-35-154-185-167.ap-south-1.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
-          TARGET: "/home/ubuntu/Three-tierapp/backend/builds"
+          TARGET: "/home/ubuntu/Three-tierapp/backend/final-dest"
 
    
