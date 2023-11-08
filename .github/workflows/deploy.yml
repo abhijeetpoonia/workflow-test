@@ -32,4 +32,5 @@ jobs:
 
       - name: Run npm start on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }} ubuntu@ec2-35-154-185-167.ap-south-1.compute.amazonaws.com "cd /home/ubuntu/Three-tierapp/backend/final && npm start"
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }} ubuntu@ec2-35-154-185-167.ap-south-1.compute.amazonaws.com && cd /home/ubuntu/Three-tierapp/backend/final && npm start
+
