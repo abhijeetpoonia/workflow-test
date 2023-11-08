@@ -27,13 +27,14 @@ jobs:
           HOSTNAME: ${{ secrets.HOST_IP }}
           USER_NAME: ${{ secrets.HOST_USER }}
         run: |
-          echo "$PRIVATE_KEY" > abhijet.pem # Use the correct key name
-          chmod 600 abhijet.pem # Use the correct key name
-          ssh -o StrictHostKeyChecking=no -i abhijet.pem ${USER_NAME}@${HOSTNAME} '
+          echo "$PRIVATE_KEY" > abhijet.pem
+          chmod 600 abhijet.pem
+          npm_path=$(which npm) # Get the path to the npm executable
+          ssh -o StrictHostKeyChecking=no -i abhijet.pem ${USER_NAME}@${HOSTNAME} "
             cd /home/ubuntu/Three-tierapp/backend/final &&
-            npm install' # Install dependencies
+            $npm_path install" # Install dependencies
 
           # Now start the application
-          ssh -o StrictHostKeyChecking=no -i abhijet.pem ${USER_NAME}@${HOSTNAME} '
+          ssh -o StrictHostKeyChecking=no -i abhijet.pem ${USER_NAME}@${HOSTNAME} "
             cd /home/ubuntu/Three-tierapp/backend/final &&
-            npm start'
+            $npm_path start" # Start the application
