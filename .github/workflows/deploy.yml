@@ -30,14 +30,10 @@ jobs:
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"
 
-      - name: install dependencies
-        run: |
-          pwd
-          cd /home/ubuntu/Three-tierapp/backend/final
-          npm install
+      - name: List directory contents
+        run: ls /home/ubuntu/Three-tierapp/backend/final
 
       - name: Deploy app1
         run: |
           cd /home/ubuntu/Three-tierapp/backend/final
           npm start
-
