@@ -29,11 +29,6 @@ jobs:
           REMOTE_HOST: "ec2-35-154-185-167.ap-south-1.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"
-
-      - name: List directory contents
-        run: chmod 777 /home/ubuntu/Three-tierapp/backend/final && ls /home/ubuntu/Three-tierapp/backend/final
-
-      - name: Deploy app1
         run: |
           cd /home/ubuntu/Three-tierapp/backend/final
           npm start
