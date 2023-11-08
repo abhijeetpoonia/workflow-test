@@ -31,9 +31,6 @@ jobs:
           chmod 600 abhijet.pem # Use the correct key name
           ssh -o StrictHostKeyChecking=no -i abhijet.pem ${USER_NAME}@${HOSTNAME} '
             cd /home/ubuntu/Three-tierapp/backend/final &&
-            npm install' 
-
-          # Now start the application
-          ssh -o StrictHostKeyChecking=no -i abhijet.pem ${USER_NAME}@${HOSTNAME} '
+            npm install &&
             cd /home/ubuntu/Three-tierapp/backend/final &&
             npm start'
