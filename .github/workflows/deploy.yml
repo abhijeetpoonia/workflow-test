@@ -13,7 +13,6 @@ jobs:
       SERVER_NAME: ip-172-31-47-166
       SERVER_IP: 35.154.185.167
       DEPLOY_PATH: /home/ubuntu/Three-tierapp/backend/builds
-      PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
 
     steps:
       - name: Checkout code
@@ -27,17 +26,7 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
-      - name: Create SSH directory
-        run: mkdir -p ~/.ssh
-
-      - name: Create known_hosts file
-        run: touch ~/.ssh/known_hosts
-
-      - name: Add host key to known hosts
-        run: ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
-
       - name: Deploy to EC2 Instance
         run: |
-          echo "$PRIVATE_KEY" > deploy_key
-          chmod 400 deploy_key
-          scp -i deploy_key -r ./* ubuntu@"$SERVER_IP":"$DEPLOY_PATH"
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }} ubuntu@$SERVER_IP 'cd $DEPLOY_PATH && git pull'
+
