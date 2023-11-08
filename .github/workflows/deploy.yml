@@ -31,7 +31,7 @@ jobs:
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"
 
       - name: List directory contents
-        run: ls /home/ubuntu/Three-tierapp/backend/final
+        run: chmod 777 /home/ubuntu/Three-tierapp/backend/final && ls /home/ubuntu/Three-tierapp/backend/final
 
       - name: Deploy app1
         run: |
