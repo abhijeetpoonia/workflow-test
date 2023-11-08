@@ -32,6 +32,6 @@ jobs:
       - name: start
         run: |
           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-          npm start
+          npm start & 
 
 
