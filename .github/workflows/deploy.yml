@@ -31,7 +31,7 @@ jobs:
       - name: Deploy to EC2 Instance
         run: |
           # Copy your application files to your EC2 instance using the private key
-          scp -i /home/ubuntu/Three-tierapp/backend/my-key -r ./* ubuntu@35.154.185.167:/home/ubuntu/Three-tierapp/backend/builds
+          scp -i /root/.ssh/id_rsa -r ./* ubuntu@ec2-35-154-185-167:/home/ubuntu/Three-tierapp/backend/builds
         env:
           YOUR_INSTANCE_IP: 35.154.185.167
 
