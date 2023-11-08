@@ -27,6 +27,9 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
+      - name: Create known_hosts file
+        run: touch ~/.ssh/known_hosts
+
       - name: Add host key to known hosts
         run: ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
 
