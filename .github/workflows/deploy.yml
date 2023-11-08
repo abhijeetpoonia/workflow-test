@@ -30,7 +30,12 @@ jobs:
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"
 
-      - name: Deploy app
+      - name: install dependencies
+        run: |
+          cd /home/ubuntu/Three-tierapp/backend/final
+          npm install
+
+      - name: Deploy app1
         run: |
           cd /home/ubuntu/Three-tierapp/backend/final
           npm start
