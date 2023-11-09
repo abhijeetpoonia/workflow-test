@@ -22,6 +22,7 @@ jobs:
         run: npm install
 
       - name: Deploy to EC2
+        working-directory: ${{ github.workspace }}
         env:
           PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           HOSTNAME: ${{ secrets.HOST_IP }}
