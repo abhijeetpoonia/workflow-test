@@ -26,11 +26,13 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
           SOURCE: "./"
-          REMOTE_HOST: "ec2-35-154-185-167.ap-south-1.compute.amazonaws.com"
+          REMOTE_HOST: "ec2-65-2-152-115.ap-south-1.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"
-
-      - name: Run npm start on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }} ubuntu@ec2-35-154-185-167.ap-south-1.compute.amazonaws.com && cd /home/ubuntu/Three-tierapp/backend/final && npm start
+          export NVM_DIR="$HOME/.nvm" &&
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
+          cd /home/ubuntu/Three-tierapp/backend/final &&
+          npm start
+
 
