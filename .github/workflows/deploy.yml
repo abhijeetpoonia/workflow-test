@@ -36,5 +36,6 @@ jobs:
             sudo apt-get install -y nodejs &&
             sudo apt-get install -y npm &&
             cd /home/ubuntu/Three-tierapp/backend/final &&
-            sudo npm install && sudo npm start &
+            sudo npm install && 
+            sudo npm start &
           '
