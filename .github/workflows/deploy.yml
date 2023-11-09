@@ -33,5 +33,5 @@ jobs:
             export NVM_DIR="$HOME/.nvm" &&
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
             cd /home/ubuntu/Three-tierapp/backend/final && 
-            sudo npm start > /home/${USER_NAME}/npm_start.log 2>&1
+            sudo npm start 
           '
