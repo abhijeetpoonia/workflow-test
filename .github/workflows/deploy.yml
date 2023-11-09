@@ -27,8 +27,8 @@ jobs:
           HOSTNAME: ${{ secrets.HOST_IP }}
           USER_NAME: ${{ secrets.HOST_USER }}
         run: |
-          echo "$PRIVATE_KEY" > key.pem && chmod 600 key.pem
-          ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} '
+          echo "$PRIVATE_KEY" > abhijet && chmod 600 abhijet
+          ssh -o StrictHostKeyChecking=no -i abhijet ${USER_NAME}@${HOSTNAME} '
           export NVM_DIR="$HOME/.nvm" &&
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
             cd /home/ubuntu/Three-tierapp/backend/final && 
