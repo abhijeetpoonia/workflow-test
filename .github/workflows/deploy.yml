@@ -21,7 +21,7 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
-      - name: Copy files to EC2 instance
+      - name: Copy files to EC2 instance using rsync
         env:
           PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           HOSTNAME: ${{ secrets.HOST_IP }}
@@ -30,8 +30,8 @@ jobs:
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"  # Destination directory on EC2
         run: |
           echo "$PRIVATE_KEY" > abhijet && chmod 600 abhijet
-          scp -o StrictHostKeyChecking=no -i abhijet -r $SOURCE/* ${USER_NAME}@${HOSTNAME}:$TARGET/
-
+          rsync -avz -e "ssh -i abhijet" $SOURCE/ ${USER_NAME}@${HOSTNAME}:$TARGET/
+          
       - name: Deploy on EC2 instance
         env:
           PRIVATE_KEY: ${{ secrets.SSH_KEY }}
