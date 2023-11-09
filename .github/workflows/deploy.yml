@@ -21,16 +21,16 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
-      - name: Deploy to my EC2 instance
+      - name: Deploy to EC2
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
-          SOURCE: "./"
-          REMOTE_HOST: "ec2-65-2-152-115.ap-south-1.compute.amazonaws.com"
-          REMOTE_USER: "ubuntu"
-          TARGET: "/home/ubuntu/Three-tierapp/backend/final"
+          PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          HOSTNAME: ${{ secrets.HOST_IP }}
+          USER_NAME: ${{ secrets.HOST_USER }}
         run: |
+          echo "$PRIVATE_KEY" > key.pem && chmod 600 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem ${USER_NAME}@${HOSTNAME} '
           export NVM_DIR="$HOME/.nvm" &&
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
-          mkdir -p /home/ubuntu/Three-tierapp/backend/final &&
-          cd /home/ubuntu/Three-tierapp/backend/final &&
-          npm start
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
+            cd /home/ubuntu/Three-tierapp/backend/final && 
+            sudo npm start
+             '
