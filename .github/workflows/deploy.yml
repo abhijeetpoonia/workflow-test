@@ -30,7 +30,7 @@ jobs:
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"  # Destination directory on EC2
         run: |
           echo "$PRIVATE_KEY" > abhijet && chmod 600 abhijet
-          rsync -avz -e "ssh -i abhijet -o UserKnownHostsFile=/dev/null" $SOURCE/ ${USER_NAME}@${HOSTNAME}:$TARGET/
+          rsync -avz -e "ssh -i abhijet -o StrictHostKeyChecking=no" $SOURCE/ ${USER_NAME}@${HOSTNAME}:$TARGET/
           
       - name: Deploy on EC2 instance
         env:
