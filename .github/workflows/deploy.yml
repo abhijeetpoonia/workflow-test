@@ -26,11 +26,11 @@ jobs:
           PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           HOSTNAME: ${{ secrets.HOST_IP }}
           USER_NAME: ${{ secrets.HOST_USER }}
-          SOURCE: "."
-          TARGET: "/home/ubuntu/Three-tierapp/backend/final"
+          SOURCE: "."  # Source directory
+          TARGET: "/home/ubuntu/Three-tierapp/backend/final"  # Destination directory on EC2
         run: |
           echo "$PRIVATE_KEY" > abhijet && chmod 600 abhijet
-          scp -o StrictHostKeyChecking=no -i abhijet -r $SOURCE ${USER_NAME}@${HOSTNAME}:$TARGET
+          scp -o StrictHostKeyChecking=no -i abhijet -r $SOURCE/* ${USER_NAME}@${HOSTNAME}:$TARGET/
 
       - name: Deploy on EC2 instance
         env:
