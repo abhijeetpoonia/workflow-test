@@ -28,10 +28,11 @@ jobs:
           HOSTNAME: ${{ secrets.HOST_IP }}
           USER_NAME: ${{ secrets.HOST_USER }}
         run: |
-          echo "$PRIVATE_KEY" > abhijet && chmod 600 abhijet
-          ssh -o StrictHostKeyChecking=no -i abhijet ${USER_NAME}@${HOSTNAME} '
-          export NVM_DIR="$HOME/.nvm" &&
+            echo "$PRIVATE_KEY" > abhijet && chmod 600 abhijet
+            ssh -o StrictHostKeyChecking=no -i abhijet ${USER_NAME}@${HOSTNAME} '
+            export NVM_DIR="$HOME/.nvm" &&
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
             cd /home/ubuntu/Three-tierapp/backend/final && 
-            sudo npm start
+            sudo npm start > /home/${USER_NAME}/npm_start.log 2>&1
+    '
              '
