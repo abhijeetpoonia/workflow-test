@@ -31,7 +31,6 @@ jobs:
         run: |
           export NVM_DIR="$HOME/.nvm" &&
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
+          mkdir -p /home/ubuntu/Three-tierapp/backend/final &&
           cd /home/ubuntu/Three-tierapp/backend/final &&
           npm start
-
-
