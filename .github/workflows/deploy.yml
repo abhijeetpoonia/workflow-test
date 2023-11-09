@@ -21,7 +21,7 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
-      - name: Deploy to my EC2 instance
+      - name: Copy files to EC2 instance
         env:
           PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           HOSTNAME: ${{ secrets.HOST_IP }}
@@ -30,12 +30,21 @@ jobs:
           TARGET: "/home/ubuntu/Three-tierapp/backend/final"
         run: |
           echo "$PRIVATE_KEY" > abhijet && chmod 600 abhijet
+          scp -o StrictHostKeyChecking=no -i abhijet -r $SOURCE ${USER_NAME}@${HOSTNAME}:$TARGET
+
+      - name: Deploy on EC2 instance
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          HOSTNAME: ${{ secrets.HOST_IP }}
+          USER_NAME: ${{ secrets.HOST_USER }}
+        run: |
+          echo "$PRIVATE_KEY" > abhijet && chmod 600 abhijet
           ssh -o StrictHostKeyChecking=no -i abhijet ${USER_NAME}@${HOSTNAME} '
             sudo dpkg --configure -a &&
             sudo apt-get update &&
             sudo apt-get install -y nodejs &&
             sudo apt-get install -y npm &&
             cd /home/ubuntu/Three-tierapp/backend/final &&
-            sudo npm install && 
+            sudo npm install &&
             nohup sudo npm start > /dev/null 2>&1 & disown
           '
